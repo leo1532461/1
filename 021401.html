@@ -124,13 +124,8 @@
 
         /* 設定小圓點（確保它們完全置中） */
         .carousel-indicators {
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            justify-content: center; /* 讓小圓點水平置中 */
-            width: 100%;
+            bottom: 20px; 
+            
         }
 
         .carousel-indicators button {
@@ -172,6 +167,12 @@
             font-size: 24px;
             font-weight: bold;
             color: #00AEEF;
+           
+            /* width: 15px;
+            height: 15px;
+            border-left: 5px solid #00AEEF; /* 蓝色箭头线条 */
+            /* border-bottom: 5px solid #00AEEF; */
+             
         }
 
          /* 讓標題更突出 */
@@ -296,10 +297,48 @@
             font-weight: bold;
         }
 
+
+         
+
         /* 選擇方案按鈕 */
         .btn-outline-primary {
             border-radius: 5px;
             font-size: 14px;
+        }
+
+        /* 數量選擇區塊 */
+        .quantity-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+        }
+
+        .quantity-box button {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            background-color: white;
+            border-radius: 50%;
+            font-size: 18px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .quantity-box button:hover {
+            background-color: #ddd;
+        }
+
+        /* 加入購物車按鈕 */
+        .cart-button {
+            background-color: #00AEEF;
+            color: white;
+            border: none;
+            font-size: 18px;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
         }
 
         .section-header {
@@ -334,7 +373,8 @@
 
         /* 右側選單 */
         .sidebar-menu {
-            text-align: right;
+            text-align:center ;
+       
         }
 
         .sidebar-menu a {
@@ -348,8 +388,8 @@
         .active-btn {
             background-color: #00AEEF;
             color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 50px;
             display: inline-block;
             text-decoration: none;
         }
@@ -376,16 +416,16 @@
 
         /* 主要內容區塊，定義字體大小、行距與間距 */
         .notice-content {
-            font-size: 16px;
+            font-size: 15px;
             color: #333;
             line-height: 1.8;
-            margin-top: 15px;
+            margin-top: 12px;
         }
 
         /* 副標題加粗，確保區塊間隔清晰 */
         .notice-content h4 {
             font-weight: bold;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
          /* 標題區塊，帶有左側黃色邊框和右側藍色橫線 */
@@ -410,7 +450,7 @@
 
         /* 主要內容區塊，定義字體大小、行距與間距 */
         .info-content {
-            font-size: 16px;
+            font-size: 14px;
             color: #333;
             line-height: 1.8;
             margin-top: 15px;
@@ -428,12 +468,8 @@
             font-size: 16px;
             margin-bottom: 8px;
         }
+        
 
-        .check-icon {
-            color: #00a651;
-            margin-right: 10px;
-            font-size: 18px;
-        }
 
         .cross-icon {
             color: #333;
@@ -535,8 +571,8 @@
     <div class="breadcrumb-container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">首頁</a></li>
-          <li class="breadcrumb-item"><a href="#">日本 群馬</a></li>
+          <li class="breadcrumb-item">首頁</li>
+          <li class="breadcrumb-item">日本 群馬</li>
           <li class="breadcrumb-item active" aria-current="page">
             日本群馬 | 伊香保玩具 & 人偶及汽車博物館 | 電子門票
           </li>
@@ -650,9 +686,86 @@
             </div>
             <div class="ticket-price">
                 <p class="price">TWD 525</p>
-                <button class="btn btn-outline-primary">選擇方案</button>
+                <!-- <button class="btn btn-outline-primary">選擇方案</button> -->
+                 <!-- Bootstrap Collapse Button -->
+            <button class="btn btn-outline-primary btn-select" type="button" data-bs-toggle="collapse" data-bs-target="#details">
+                選擇方案
+            </button>
             </div>
         </div>
+
+        <!-- Bootstrap Collapse 组件 -->
+    <div class="collapse mt-2" id="details">
+        <div class="card card-body">
+            <table class="table">
+                <tr>
+                    <th>關於此方案</th>
+                    <td>📩 立即確認  📜 立即發送憑證</td>
+                </tr>
+                <tr>
+                    <th>方案限制</th>
+                    <td>需要按照預訂日期及當天開放時間內兌換，逾期失效</td>
+                </tr>
+                <tr>
+                    <th>憑證使用期限</th>
+                    <td>需要按照預訂日期及當天開放時間內使用，逾期失效</td>
+                </tr>
+                <tr>
+                    <th>取消政策</th>
+                    <td>商品一經訂購完成後，即不可取消、更改訂單，亦不得請求退款</td>
+                </tr>
+            </table>
+            <p class="text-muted small">🔔 由於站內商品來自全球各地，訂單取消時間將依該供應商所在時區判定。</p>
+
+             <!-- 數量選擇 -->
+             <h4 class="mt-3">請選擇數量</h4>
+             <div class="d-flex justify-content-between align-items-center">
+                 <div>
+                     <p>成人（國中生以上）</p>
+                     <div class="quantity-box">
+                         <button onclick="updateQuantity('adult', -1)">−</button>
+                         <span id="adult-quantity">1</span>
+                         <button onclick="updateQuantity('adult', 1)">+</button>
+                     </div>
+                 </div>
+                 <p class="price">TWD 527</p>
+             </div>
+ 
+             <div class="d-flex justify-content-between align-items-center">
+                 <div>
+                     <p>兒童（小學生）</p>
+                     <div class="quantity-box">
+                         <button onclick="updateQuantity('child', -1)">−</button>
+                         <span id="child-quantity">0</span>
+                         <button onclick="updateQuantity('child', 1)">+</button>
+                     </div>
+                 </div>
+                 <p class="price">TWD 245</p>
+             </div>
+ 
+             <div class="d-flex justify-content-between align-items-center">
+                 <div>
+                     <p>幼童（未就學孩童）</p>
+                     <div class="quantity-box">
+                         <button onclick="updateQuantity('infant', -1)">−</button>
+                         <span id="infant-quantity">0</span>
+                         <button onclick="updateQuantity('infant', 1)">+</button>
+                     </div>
+                 </div>
+                 <p class="price">TWD 191</p>
+             </div>
+ 
+             <!-- 總金額 -->
+             <h3 class="mt-3">總金額: <span id="total-price">TWD 527</span></h3>
+ 
+             <!-- 加入購物車 -->
+             <button class="cart-button">加入購物車</button>
+         </div>
+     </div>
+ 
+        </div>
+    </div>
+
     </div>
 </div>
 
