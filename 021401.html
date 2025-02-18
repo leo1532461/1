@@ -234,8 +234,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
-            margin-top: 10px;
+            gap: 15px;
+            margin-top: 5px;
         }
 
          
@@ -536,9 +536,9 @@
 
         <!-- 右侧功能 -->
         <div class="nav-right">
-          <a href="#">旅遊規劃必備APP</a>
-          <a href="#">登入 / 註冊</a>
-          <a href="#" class="bi bi-cart"></a>
+          <span>旅遊規劃必備APP</span>
+          <span>登入/註冊</span>
+          
         </div>
       </div>
     </nav>
@@ -673,9 +673,79 @@
             </div>
             <div class="ticket-price">
                 <p class="price">TWD 910</p>
-                <button class="btn btn-outline-primary">選擇方案</button>
+                <button class="btn btn-outline-primary btn-select" type="button" data-bs-toggle="collapse" data-bs-target="#details">
+                    選擇方案
+                </button>
             </div>
         </div>
+
+        <!-- 詳細資訊與數量選擇 -->
+    <div class="collapse mt-2" id="details">
+        <div class="card card-body">
+            <table class="table">
+                <tr>
+                    <th>關於此方案</th>
+                    <td>📩 立即確認  📜 立即發送憑證</td>
+                </tr>
+                <tr>
+                    <th>方案限制</th>
+                    <td>需要按照預訂日期及當天開放時間內兌換，逾期失效</td>
+                </tr>
+                <tr>
+                    <th>憑證使用期限</th>
+                    <td>需要按照預訂日期及當天開放時間內使用，逾期失效</td>
+                </tr>
+                <tr>
+                    <th>取消政策</th>
+                    <td>商品一經訂購完成後，即不可取消、更改訂單，亦不得請求退款</td>
+                </tr>
+            </table>
+
+            <!-- 數量選擇 -->
+            <h4 class="mt-3">請選擇數量</h4>
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p>成人（國中生以上）</p>
+                    <div class="quantity-box">
+                        <button onclick="updateQuantity('adult', -1)">−</button>
+                        <span id="adult-quantity">1</span>
+                        <button onclick="updateQuantity('adult', 1)">+</button>
+                    </div>
+                </div>
+                <p class="price">TWD 910</p>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p>兒童（小學生）</p>
+                    <div class="quantity-box">
+                        <button onclick="updateQuantity('child', -1)">−</button>
+                        <span id="child-quantity">0</span>
+                        <button onclick="updateQuantity('child', 1)">+</button>
+                    </div>
+                </div>
+                <p class="price">TWD 458</p>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p>幼童（未就學孩童）</p>
+                    <div class="quantity-box">
+                        <button onclick="updateQuantity('infant', -1)">−</button>
+                        <span id="infant-quantity">0</span>
+                        <button onclick="updateQuantity('infant', 1)">+</button>
+                    </div>
+                </div>
+                <p class="price">TWD 404</p>
+            </div>
+
+            <!-- 總金額 -->
+            <h3 class="mt-3">總金額: <span id="total-price">TWD 910</span></h3>
+
+            <!-- 加入購物車 -->
+            <button class="cart-button">加入購物車</button>
+        </div>
+    </div>
 
         <!-- 第二張票券 -->
         <div class="ticket-card">
@@ -910,8 +980,6 @@
       </div>
   </div>
 </footer>
-
-
 
 
 
