@@ -202,7 +202,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
+            text-align: left;
             border: 1px solid #ddd;
         }
 
@@ -211,6 +211,7 @@
             font-weight: bold;
             color: #333;
             margin-bottom: 10px;
+          
         }
 
         .price small {
@@ -224,16 +225,16 @@
             border: none;
             font-size: 16px;
             padding: 10px;
-            width: 100%;
+            width: 90%;
             font-weight: bold;
+            margin: 0 auto;
         }
 
         .discount-text {
             font-size: 14px;
             color: #555;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex;    
+            text-align: left;
             gap: 15px;
             margin-top: 5px;
         }
@@ -245,6 +246,11 @@
             padding: 20px;
             border-radius: 10px;
         }
+
+        .card-body {
+            padding-bottom: 24px; /* 或者 16px/32px 依照需求調整 */
+        }
+
 
         /* 票券卡片樣式 */
         .ticket-card {
@@ -369,6 +375,48 @@
             font-weight: bold;
             color: #007bff;
             cursor: pointer;
+        }
+
+         /* 容器和箭头样式 */
+         .calendar-container {
+            max-width: 650px;
+            margin: 20px auto;
+        }
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f8f9fa; /* 轻微灰色背景 */
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .calendar-header span {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* 日历表格样式 */
+        .calendar-table th {
+            text-align: center;
+            background-color: #e9ecef; /* 浅灰色标题背景 */
+            color: #495057; /* 深灰字体颜色 */
+        }
+        .calendar-day {
+            height: 100px;
+            vertical-align: middle;
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+        }
+        .calendar-day .price {
+            display: block;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #007bff;
+        }
+        .disabled {
+            color: #cccccc;
         }
 
         /* 右側選單 */
@@ -516,6 +564,16 @@
             font-size: 12px;
             color: #666;
         }
+
+        /* 针对小屏幕设备 */
+        @media (max-width: 992px) {
+     .container{
+        width: 100%; /* 让日历和信息卡片在小屏幕上各占满整个容器宽度 */
+        
+    }
+    /* 可能还需要调整字体大小、间距等 */
+}
+
     </style>
   </head>
   <body>
@@ -588,7 +646,8 @@
       </nav>
     </div>
 
-    <!-- 7張圖片的輪播圖 -->
+<div class="container-md">
+        <!-- 7張圖片的輪播圖 -->
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
     
     <!-- 小圓點指示器（已修正置中） -->
@@ -636,6 +695,9 @@
     </button>
 </div>
 
+
+</div>
+
 <div class="container mt-4">
     <div class="row">
         <!-- 左側資訊 -->
@@ -661,7 +723,7 @@
                 <p class="price">TWD 525 <small>起</small></p>
                 <button class="btn btn-primary">選擇方案</button>
                 <p class="discount-text">
-                    <img src="https://img.icons8.com/ios-filled/20/ff0000/discount.png" alt="折扣"> 可使用和泰Points折抵
+                    <img src="https://img.icons8.com/ios-filled/20/ff0000/discount.png" alt="折扣">可使用和泰Points折抵
                 </p>
             </div>
         </div>
@@ -681,15 +743,41 @@
             </div>
             <div class="ticket-price">
                 <p class="price">TWD 910</p>
-                <button class="btn btn-outline-primary btn-select" type="button" data-bs-toggle="collapse" data-bs-target="#details">
+                <button class="btn btn-outline-primary btn-select" type="button" data-bs-toggle="collapse" data-bs-target="#detail1">
                     選擇方案
                 </button>
             </div>
         </div>
-
+        
+        
         <!-- 詳細資訊與數量選擇 -->
-    <div class="collapse mt-2" id="details">
-        <div class="card card-body">
+    <div class="collapse mb-4 row" id="detail1">
+          <!-- 日曆 -->
+        <div class="container col-6">
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <span onclick="changeMonth(-1)">&#8592;</span>
+                    <h4  id="monthYear" class="text-center m-0"></h4>
+                    <span onclick="changeMonth(1)">&#8594;</span>
+                </div>
+                <table class="table calendar-table">
+                    <thead>
+                        <tr>
+                            <th>日</th>
+                            <th>一</th>
+                            <th>二</th>
+                            <th>三</th>
+                            <th>四</th>
+                            <th>五</th>
+                            <th>六</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendarBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card card-body pb-4 my-4 col-6">
             <table class="table">
                 <tr>
                     <th>關於此方案</th>
@@ -772,8 +860,37 @@
             </div>
         </div>
 
+
+            
+    
+
         <!-- Bootstrap Collapse 组件 -->
     <div class="collapse mt-2" id="details">
+
+         <!-- 日曆 -->
+         <div class="container col-6">
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <span onclick="changeMonth(-1)">&#8592;</span>
+                    <h4 id="monthYear" class="text-center m-0"></h4>
+                    <span onclick="changeMonth(1)">&#8594;</span>
+                </div>
+                <table class="table calendar-table">
+                    <thead>
+                        <tr>
+                            <th>日</th>
+                            <th>一</th>
+                            <th>二</th>
+                            <th>三</th>
+                            <th>四</th>
+                            <th>五</th>
+                            <th>六</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendarBody"></tbody>
+                </table>
+            </div>
+        </div>
         <div class="card card-body">
             <table class="table">
                 <tr>
@@ -988,6 +1105,59 @@
       </div>
   </div>
 </footer>
+
+<script>
+    let currentYear = new Date().getFullYear();
+    let currentMonth = new Date().getMonth();
+
+    const priceDays = {};
+
+    function generateCalendar(year, month) {
+        document.getElementById('monthYear').textContent = `${year}年 ${month + 1}月`;
+
+        const firstDay = new Date(year, month).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        const calendarBody = document.getElementById('calendarBody');
+        calendarBody.innerHTML = '';
+
+        let date = 1;
+        for (let i = 0; i < 6; i++) {
+            let row = document.createElement('tr');
+            for (let j = 0; j < 7; j++) {
+                let cell = document.createElement('td');
+                cell.className = 'calendar-day';
+                if (i === 0 && j < firstDay) {
+                    cell.classList.add('disabled');
+                } else if (date > daysInMonth) {
+                    cell.classList.add('disabled');
+                } else {
+                    cell.innerHTML = date;
+                    if (priceDays[date]) {
+                        cell.innerHTML += `<span class='price'>TWD ${priceDays[date]}</span>`;
+                    }
+                    date++;
+                }
+                row.appendChild(cell);
+            }
+            calendarBody.appendChild(row);
+        }
+    }
+
+    function changeMonth(step) {
+        currentMonth += step;
+        if (currentMonth < 0) {
+            currentYear--;
+            currentMonth = 11;
+        } else if (currentMonth > 11) {
+            currentYear++;
+            currentMonth = 0;
+        }
+        generateCalendar(currentYear, currentMonth);
+    }
+
+    generateCalendar(currentYear, currentMonth);
+</script>
 
 
 
