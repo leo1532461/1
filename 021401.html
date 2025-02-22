@@ -572,6 +572,79 @@
         
     }
     /* 可能还需要调整字体大小、间距等 */
+
+    @media (max-width: 576px) {
+  .container {
+    max-width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .calendar-container {
+    width: 100%;
+  }
+}
+
+/* 手機版（<576px） */
+@media (max-width: 576px) {
+  .container {
+    max-width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .calendar-container {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+
+  .col-6 {
+    width: 100%;
+  }
+
+  .ticket-info {
+    font-size: 14px;
+  }
+
+  .price-card {
+    text-align: center;
+  }
+}
+
+/* 平板版（≥768px） */
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+
+  .col-md-6 {
+    width: 50%;
+  }
+}
+
+/* 小筆電（≥992px） */
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+
+  .col-lg-4 {
+    width: 33.33%;
+  }
+
+  .col-lg-6 {
+    width: 50%;
+  }
+}
+
+
+
 }
 
     </style>
@@ -639,7 +712,7 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item">首頁</li>
           <li class="breadcrumb-item">日本 群馬</li>
-          <li class="breadcrumb-item active" aria-current="page">
+          <li class="breadcrumb-item active .col-sm-" aria-current="page">
             日本群馬 | 伊香保玩具 & 人偶及汽車博物館 | 電子門票
           </li>
         </ol>
@@ -751,13 +824,13 @@
         
         
         <!-- 詳細資訊與數量選擇 -->
-    <div class="collapse mb-4 row" id="detail1">
+    <div class="collapse mb-2 row" id="detail1">
           <!-- 日曆 -->
-        <div class="container col-6">
+        <div class="container col-12 col-md-6">
             <div class="calendar-container">
                 <div class="calendar-header">
                     <span onclick="changeMonth(-1)">&#8592;</span>
-                    <h4  id="monthYear" class="text-center m-0"></h4>
+                    <h4  class="monthYear" class="text-center m-0"></h4>
                     <span onclick="changeMonth(1)">&#8594;</span>
                 </div>
                 <table class="table calendar-table">
@@ -772,12 +845,12 @@
                             <th>六</th>
                         </tr>
                     </thead>
-                    <tbody id="calendarBody"></tbody>
+                    <tbody class="calendarBody"></tbody>
                 </table>
             </div>
         </div>
 
-        <div class="card card-body pb-4 my-4 col-6">
+        <div class="card card-body pb-4 my-4 col-12 col-md-6">
             <table class="table">
                 <tr>
                     <th>關於此方案</th>
@@ -862,36 +935,36 @@
 
 
             
-    
+    <!-- --<div class="collapse mb-4 row" id="detail1">- -->
 
         <!-- Bootstrap Collapse 组件 -->
-    <div class="collapse mt-2" id="details">
-
-         <!-- 日曆 -->
-         <div class="container col-6">
-            <div class="calendar-container">
-                <div class="calendar-header">
-                    <span onclick="changeMonth(-1)">&#8592;</span>
-                    <h4 id="monthYear" class="text-center m-0"></h4>
-                    <span onclick="changeMonth(1)">&#8594;</span>
-                </div>
-                <table class="table calendar-table">
-                    <thead>
-                        <tr>
-                            <th>日</th>
-                            <th>一</th>
-                            <th>二</th>
-                            <th>三</th>
-                            <th>四</th>
-                            <th>五</th>
-                            <th>六</th>
-                        </tr>
-                    </thead>
-                    <tbody id="calendarBody"></tbody>
-                </table>
-            </div>
+    <!-- <div class="collapse mb-4 row" id="details"> -->
+        <div class="collapse mb-4 row" id="details">
+                 <!-- 日曆 2 -->
+<div class="container col-12 col-md-6">
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <span onclick="changeMonth(-1, 1)">&#8592;</span>
+            <h4 class="monthYear text-center m-0"></h4>
+            <span onclick="changeMonth(1, 1)">&#8594;</span>
         </div>
-        <div class="card card-body">
+        <table class="table calendar-table">
+            <thead>
+                <tr>
+                    <th>日</th>
+                    <th>一</th>
+                    <th>二</th>
+                    <th>三</th>
+                    <th>四</th>
+                    <th>五</th>
+                    <th>六</th>
+                </tr>
+            </thead>
+            <tbody class="calendarBody"></tbody>
+        </table>
+    </div>
+</div>
+        <div class="card card-body pb-4 my-4 col-12 col-md-6">
             <table class="table">
                 <tr>
                     <th>關於此方案</th>
@@ -1107,56 +1180,108 @@
 </footer>
 
 <script>
-    let currentYear = new Date().getFullYear();
-    let currentMonth = new Date().getMonth();
+    // let currentYear = new Date().getFullYear();
+    // let currentMonth = new Date().getMonth();
 
-    const priceDays = {};
+    // const priceDays = {};
 
-    function generateCalendar(year, month) {
-        document.getElementById('monthYear').textContent = `${year}年 ${month + 1}月`;
+    // function generateCalendar(year, month) {
+    //     document.getElementsByClassName('monthYear')[0].textContent = `${year}年 ${month + 1}月`;
 
-        const firstDay = new Date(year, month).getDay();
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
+    //     const firstDay = new Date(year, month).getDay();
+    //     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-        const calendarBody = document.getElementById('calendarBody');
-        calendarBody.innerHTML = '';
+    //     const calendarBody = document.getElementsByClassName('calendarBody')[0];
+    //     calendarBody.innerHTML = '';
 
-        let date = 1;
-        for (let i = 0; i < 6; i++) {
-            let row = document.createElement('tr');
-            for (let j = 0; j < 7; j++) {
-                let cell = document.createElement('td');
-                cell.className = 'calendar-day';
-                if (i === 0 && j < firstDay) {
-                    cell.classList.add('disabled');
-                } else if (date > daysInMonth) {
-                    cell.classList.add('disabled');
-                } else {
-                    cell.innerHTML = date;
-                    if (priceDays[date]) {
-                        cell.innerHTML += `<span class='price'>TWD ${priceDays[date]}</span>`;
-                    }
-                    date++;
-                }
-                row.appendChild(cell);
+    //     let date = 1;
+    //     for (let i = 0; i < 6; i++) {
+    //         let row = document.createElement('tr');
+    //         for (let j = 0; j < 7; j++) {
+    //             let cell = document.createElement('td');
+    //             cell.className = 'calendar-day';
+    //             if (i === 0 && j < firstDay) {
+    //                 cell.classList.add('disabled');
+    //             } else if (date > daysInMonth) {
+    //                 cell.classList.add('disabled');
+    //             } else {
+    //                 cell.innerHTML = date;
+    //                 if (priceDays[date]) {
+    //                     cell.innerHTML += `<span class='price'>TWD ${priceDays[date]}</span>`;
+    //                 }
+    //                 date++;
+    //             }
+    //             row.appendChild(cell);
+    //         }
+    //         calendarBody.appendChild(row);
+    //     }
+    // }
+
+    // function changeMonth(step) {
+    //     currentMonth += step;
+    //     if (currentMonth < 0) {
+    //         currentYear--;
+    //         currentMonth = 11;
+    //     } else if (currentMonth > 11) {
+    //         currentYear++;
+    //         currentMonth = 0;
+    //     }
+    //     generateCalendar(currentYear, currentMonth);
+    // }
+
+    // generateCalendar(currentYear, currentMonth);
+
+    let calendars = [
+    { year: new Date().getFullYear(), month: new Date().getMonth() },
+    { year: new Date().getFullYear(), month: new Date().getMonth() }
+];
+
+function generateCalendar(index) {
+    const year = calendars[index].year;
+    const month = calendars[index].month;
+    const monthYear = document.getElementsByClassName('monthYear')[index];
+    const calendarBody = document.getElementsByClassName('calendarBody')[index];
+
+    monthYear.textContent = `${year}年 ${month + 1}月`;
+    calendarBody.innerHTML = '';
+
+    const firstDay = new Date(year, month).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    let date = 1;
+    for (let i = 0; i < 6; i++) {
+        let row = document.createElement('tr');
+        for (let j = 0; j < 7; j++) {
+            let cell = document.createElement('td');
+            cell.className = 'calendar-day';
+            if (i === 0 && j < firstDay) {
+                cell.classList.add('disabled');
+            } else if (date > daysInMonth) {
+                cell.classList.add('disabled');
+            } else {
+                cell.textContent = date++;
             }
-            calendarBody.appendChild(row);
+            row.appendChild(cell);
         }
+        calendarBody.appendChild(row);
     }
+}
 
-    function changeMonth(step) {
-        currentMonth += step;
-        if (currentMonth < 0) {
-            currentYear--;
-            currentMonth = 11;
-        } else if (currentMonth > 11) {
-            currentYear++;
-            currentMonth = 0;
-        }
-        generateCalendar(currentYear, currentMonth);
+function changeMonth(step, index) {
+    calendars[index].month += step;
+    if (calendars[index].month < 0) {
+        calendars[index].year--;
+        calendars[index].month = 11;
+    } else if (calendars[index].month > 11) {
+        calendars[index].year++;
+        calendars[index].month = 0;
     }
+    generateCalendar(index);
+}
 
-    generateCalendar(currentYear, currentMonth);
+// 初始化所有日曆
+calendars.forEach((_, index) => generateCalendar(index));
+
 </script>
 
 
